@@ -10,13 +10,10 @@ import java.io.IOException;
 public class main {
     public static void main(String[] args) throws IOException {
         Document doc = Jsoup.connect("https://www.sport.cz/vasenazory/222118").get();
-        Elements coments = doc.select("#discussion-block div.report-text");
+        Elements coments = doc.select("#discussion-block div.report-text div");
         for (Element coment:coments
              ) {
-            System.out.println("name: "+coment.select(".name").text());
-            System.out.println("city: "+coment.select(".city").text());
-            System.out.println("time: "+coment.select(".datetime").text());
-            System.out.println("coment: "+coment.select("div div").text());
+            System.out.println(coment);
         }
     }
 }
