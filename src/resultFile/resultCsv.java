@@ -36,6 +36,9 @@ public class resultCsv {
             featuresCsv.add(row);
         }
     }
+    public void countOfFeatures (){
+        System.out.println(featuresAll.size());
+    }
 
     public void create () {
         System.out.println(featuresAll);

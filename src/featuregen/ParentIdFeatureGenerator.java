@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * Created by komp2 on 12.10.2016.
  */
-public class ParentClassFeatureGenerator implements IFeatureGenerator {
-	private static final String PREFIX = "parentClass";
+public class ParentIdFeatureGenerator implements IFeatureGenerator {
+	private static final String PREFIX = "parentId";
 
 	@Override
 	public void createFeatures(List<String> features, Element element) {
@@ -18,14 +18,13 @@ public class ParentClassFeatureGenerator implements IFeatureGenerator {
 				break;
 			}
 			element = element.parent();
-			for (String className : element.classNames()) {
+			for (String classId : element.attr("id").split(" ")) {
 				String subPrefix = "Depth-" + i + "_";
-				if (!features.contains(PREFIX + subPrefix + className)) {
-					features.add(PREFIX + subPrefix + className);
+				if (!features.contains(PREFIX + subPrefix + classId)) {
+					features.add(PREFIX + subPrefix + classId);
 				}
 			}
 			i++;
 		}
 	}
-
 }
