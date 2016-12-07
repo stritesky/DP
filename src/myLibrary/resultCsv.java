@@ -1,4 +1,4 @@
-package resultFile;
+package myLibrary;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class resultCsv {
 
-    private List<Object> featuresAll = new LinkedList<>();
+    private List<Object> featuresAll = new LinkedList<>(); //features all without label
     private List<List> featuresCsv = new LinkedList<>();
 
     //Delimiter used in CSV file
@@ -21,7 +21,7 @@ public class resultCsv {
 
         for (List item : result) {
             for (Object i:item){
-                if (!featuresAll.contains(i)){
+                if (!featuresAll.contains(i) && !i.equals(parser.LABEL_POSITIVE) && !i.equals(parser.LABEL_NEGATIVE)){
                     featuresAll.add(i);
                 }
             }
@@ -29,7 +29,8 @@ public class resultCsv {
 
         for (List resultItem : result){
             List<String> row = new LinkedList<>();
-
+            System.out.println(resultItem.get(0));
+            row.add((resultItem.get(0) == parser.LABEL_POSITIVE)? "1" : "0"); //label positive or negative
             for (Object featuresAllItem : featuresAll) {
                 row.add(resultItem.contains(featuresAllItem)? "1" : "0");
             }
@@ -38,31 +39,31 @@ public class resultCsv {
     }
     public void countOfFeatures (){
 
-        System.out.println("Count of featute: " + featuresAll.size());
+        System.out.println("Count of features: " + featuresAll.size());
     }
 
     public void create () {
         System.out.println(featuresAll);
-        String fileName = "test.csv";
+        String fileName = "result.csv";
         FileWriter fileWriter = null;
 
         try {
             fileWriter = new FileWriter(fileName);
 
             //Write the CSV file header
-            fileWriter.append("label");
-            for (Object item: featuresAll) {
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(item));
-            }
-            fileWriter.append(NEW_LINE_SEPARATOR);
+//            fileWriter.append("label");
+//
+//            for (Object item: featuresAll) {
+//                fileWriter.append(COMMA_DELIMITER);
+//                fileWriter.append(String.valueOf(item));
+//            }
+//            fileWriter.append(NEW_LINE_SEPARATOR);
 
             //Write the CSV file
             for (List row : featuresCsv) {
-                fileWriter.append("1");
                 for (Object element : row) {
-                    fileWriter.append(COMMA_DELIMITER);
                     fileWriter.append(String.valueOf(element));
+                    fileWriter.append(COMMA_DELIMITER);
                 }
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
