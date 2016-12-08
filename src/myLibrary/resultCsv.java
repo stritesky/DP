@@ -42,21 +42,13 @@ public class resultCsv {
     }
 
     public void create () {
+        System.out.println("create CSV");
         System.out.println(featuresAll);
         String fileName = "result.csv";
         FileWriter fileWriter = null;
 
         try {
             fileWriter = new FileWriter(fileName);
-
-            //Write the CSV file header
-//            fileWriter.append("label");
-//
-//            for (Object item: featuresAll) {
-//                fileWriter.append(COMMA_DELIMITER);
-//                fileWriter.append(String.valueOf(item));
-//            }
-//            fileWriter.append(NEW_LINE_SEPARATOR);
 
             //Write the CSV file
             for (List row : featuresCsv) {

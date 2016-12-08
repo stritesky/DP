@@ -12,14 +12,13 @@ public class main {
         List<List> result = new LinkedList<>();
 
         //create parse
+        String fileName = "input.json";
         parser p = new parser();
-        p.create(result);
+        p.create(result, fileName);
 
         //create CSV
-        System.out.println("create CSV");
         resultCsv csv = new resultCsv(result);
         csv.countOfFeatures();
         csv.create();
     }
-
 }

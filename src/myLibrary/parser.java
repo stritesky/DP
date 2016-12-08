@@ -42,11 +42,11 @@ public class parser {
         featuregen.add(new ParentSiblingsAttributeGenerator());
     }
 
-    public void create(List<List> result){
+    public void create(List<List> result, String fileName){
 
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("input.json"));
+            Object obj = parser.parse(new FileReader(fileName));
 
             JSONObject jsonObject =  (JSONObject) obj;
 
@@ -67,7 +67,6 @@ public class parser {
                 } else {
                     doc = Jsoup.connect((String) link.get("link")).get();
                 }
-                    System.out.println(link.get("positive"));
                 generateAttribute(doc, (String) link.get("positive"), result, LABEL_POSITIVE);
                 generateAttribute(doc, (String) link.get("negative"), result, LABEL_NEGATIVE);
 
