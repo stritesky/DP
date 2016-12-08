@@ -1,6 +1,10 @@
 package myLibrary;
 
 import featuregen.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,6 +12,10 @@ import org.jsoup.select.Elements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,9 +30,8 @@ public class parser {
 
     private WebDriver driver = new PhantomJSDriver();
     private List<IFeatureGenerator> featuregen = new LinkedList<>();
-    private List<String[]> linkURLs = new LinkedList<>();
 
-    public parser(List<String[]> links) {
+    public parser() {
         System.setProperty("webdriver.phantomjs.driver","/usr/bin/phantomjs");
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -33,41 +40,60 @@ public class parser {
         featuregen.add(new ParentAttributeGenerator());
         featuregen.add(new ParentSiblingsTagNameGenerator());
         featuregen.add(new ParentSiblingsAttributeGenerator());
-
-        linkURLs = links;
     }
 
     public void create(List<List> result){
-        for (String[] linkURL : linkURLs) {
 
-            try {
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader("input.json"));
+
+            JSONObject jsonObject =  (JSONObject) obj;
+
+            JSONArray links = (JSONArray) jsonObject.get("links");
+
+            // loop array
+            Iterator<JSONObject> iterator = links.iterator();
+            while (iterator.hasNext()) {
+                JSONObject link = iterator.next();
+                System.out.println(link.get("link"));
+
+
+                try {
                 Document doc;
-                if (linkURL[3] == "js") {
-                    driver.get(linkURL[0]);
+                if ((boolean)link.get("selenium")) {
+                    driver.get((String) link.get("link"));
                     doc = Jsoup.parse(driver.getPageSource());
                 } else {
-                    doc = Jsoup.connect(linkURL[0]).get();
+                    doc = Jsoup.connect((String) link.get("link")).get();
                 }
-                generateAttribute(doc, linkURL, result, LABEL_POSITIVE);
-                generateAttribute(doc, linkURL, result, LABEL_NEGATIVE);
+                    System.out.println(link.get("positive"));
+                generateAttribute(doc, (String) link.get("positive"), result, LABEL_POSITIVE);
+                generateAttribute(doc, (String) link.get("negative"), result, LABEL_NEGATIVE);
 
-            }catch (Exception e) {
-                System.out.println("io - "+e);
+                }catch (Exception e) {
+                    System.out.println("io - "+e);
+                }
             }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
     }
 
-    private void generateAttribute (Document doc,String[] link, List<List> result, String label) {
-        Elements comments;
-        if (label == LABEL_POSITIVE) {
-            comments = doc.select(link[1]);
-        } else {
-            comments = doc.select(link[2]);
-        }
-//                System.out.println(coments);
-        for (Element element:comments) {
+    private void generateAttribute (Document doc,String selector, List<List> result, String label) {
+        System.out.println();
+        System.out.println(label);
+        Elements elements = doc.select(selector);
+
+//                System.out.println(elements);
+        for (Element element:elements) {
             List<String> features = new LinkedList<>();
-//                    System.out.println(element.text());
+                    System.out.println(element.text());
             features.add(label);
             for (IFeatureGenerator gen : featuregen) {
                 gen.createFeatures(features, element);

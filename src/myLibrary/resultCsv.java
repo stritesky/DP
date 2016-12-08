@@ -29,7 +29,6 @@ public class resultCsv {
 
         for (List resultItem : result){
             List<String> row = new LinkedList<>();
-            System.out.println(resultItem.get(0));
             row.add((resultItem.get(0) == parser.LABEL_POSITIVE)? "1" : "0"); //label positive or negative
             for (Object featuresAllItem : featuresAll) {
                 row.add(resultItem.contains(featuresAllItem)? "1" : "0");
@@ -61,9 +60,13 @@ public class resultCsv {
 
             //Write the CSV file
             for (List row : featuresCsv) {
+                boolean first = true;
                 for (Object element : row) {
+                    if (!first) {
+                        fileWriter.append(COMMA_DELIMITER);
+                    }
                     fileWriter.append(String.valueOf(element));
-                    fileWriter.append(COMMA_DELIMITER);
+                    first = false;
                 }
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }

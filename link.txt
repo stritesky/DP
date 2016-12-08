@@ -14,3 +14,15 @@ www.dailymail.co.uk NNNNNNNNNNNN
 new
 https://www.gnome-look.org/content/show.php/LocalTODOScreenlet?content=114228
 https://support.wunderlist.com/customer/portal/questions/14442765-linux-version
+
+
+  //add link - NOT work
+//        linkURLs.add(new String[]{"http://www.dailymail.co.uk/news/article-3953988/Obama-meet-Australia-Canada-leaders-return-US.html","div.diskuse-text","js"});
+//        linkURLs.add(new String[]{"https://www.youtube.com/watch?v=mivBmNP-h-g&t=3034s","div.gig-comment-body","js"});
+//        linkURLs.add(new String[]{"http://www.express.co.uk/news/world/735340/Hillary-Clinton-US-President-John-Bonifaz-J-Alex-Halderman-Wisconsin-Pennsylvania-Michigan","div.gig-comment-body","js"});
+//        linkURLs.add(new String[]{
+//                "https://www.sport.cz/vasenazory/224381",
+//                "div.report-text div",
+//                "div.report-text div",
+//                "no"
+//        });

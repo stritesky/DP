@@ -306,5 +306,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="client-combined-3.0.1-nodeps" level="project" />
+    <orderEntry type="library" name="json-simple-1.1" level="project" />
   </component>
 </module>

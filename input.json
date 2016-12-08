@@ -1,0 +1,76 @@
+{
+  "links":[
+    {
+      "link": "http://www.lidovky.cz/diskuse.aspx?iddiskuse=A161123_074429_ln_zahranici_ELE",
+      "selenium": false,
+      "positive": "div.contribution table tbody tr td.right p:last-of-type",
+      "negative": "#dokumenty h2"
+    },
+    {
+      "link": "http://tn.nova.cz/clanek/zima-uderi-na-cesko-blizi-se-konec-tepla-i-inverze-predpoved.html",
+      "selenium": false,
+      "positive": "div.com_text",
+      "negative": ".article_small h4 a"
+    },
+    {
+      "link": "http://9gag.com/gag/aMwjjbR?ref=fsidebar#comment",
+      "selenium": true,
+      "positive": "div.badge-content",
+      "negative": ".info-container h3 a"
+    },
+    {
+      "link": "http://stalkerky.cz/agata-neco-chystaaa/",
+      "selenium": false,
+      "positive": "article.comment-body div p",
+      "negative": "li.menu-item a"
+    },
+    {
+      "link": "http://www.csfd.cz/film/52430-nocni-zvirata/komentare/",
+      "selenium": false,
+      "positive": "ul.ui-posts-list li p",
+      "negative": "#ratings ul li a"
+    },
+    {
+      "link": "http://mtbs.cz/clanek/v-usa-hori-diskuse-nad-elektrokoly-na-trailech-jsou-nechtena/kategorie/pozvanky#.WDWXr3XhBhF",
+      "selenium": false,
+      "positive": "#comments li p",
+      "negative": "div.rss-feed li a p"
+    },
+    {
+      "link": "http://www.denik.cz/diskuse/turecke-dobrodruzstvi.html",
+      "selenium": true,
+      "positive": "div.diskuse-text",
+      "negative": "a[data-ga-push=menu]"
+    },
+    {
+      "link": "http://www.zive.cz/clanky/6-programatorskych-chyb-ktere-zabijely-a-staly-stovky-milionu-dolaru/sc-3-a-184788/default.aspx?artcomments=1",
+      "selenium": false,
+      "positive": ".forum-text p",
+      "negative": "div.cs-cnt-cl-r div.fs-os div.bx-cnt ul li a span"
+    },
+    {
+      "link": "http://www.auto.cz/dieselgate-cislo-2-100027/diskuse?typ=1&sort=2",
+      "selenium": false,
+      "positive": ".comment-text",
+      "negative": "div.ziveauto div ul li a"
+    },
+    {
+      "link": "http://zpravy.idnes.cz/diskuse.aspx?iddiskuse=A161106_145250_domaci_bur",
+      "selenium": false,
+      "positive": ".user-text p",
+      "negative": "div.tag-list a"
+    },
+    {
+      "link": "http://www.blesk.cz/clanek/celebrity-svetove-celebrity/432315/rozvod-jolie-a-pitta-brad-ma-novou-velmi-slavnou-lasku-uz-spolu-spi-tvrdi-bodyguard.html",
+      "selenium": true,
+      "positive": "div.commentsBubble p",
+      "negative": "div.list-article-small a"
+    },
+    {
+      "link": "http://www.foxnews.com/politics/2016/11/20/schumer-hints-compromise-with-trump-but-not-on-obamacare.html",
+      "selenium": true,
+      "positive": "div.fyre-comment p",
+      "negative": "span.ob-rec-text"
+    }
+  ]
+}
