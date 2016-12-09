@@ -71,6 +71,78 @@
       "selenium": true,
       "positive": "div.fyre-comment p",
       "negative": "span.ob-rec-text"
+    },
+    {
+      "link": "http://www.parlamentnilisty.cz/arena/monitor/CT-dostala-nakladacku-za-porad-o-ctvrti-ze-ktere-jsou-muslimsti-vrazi-To-radeji-ani-nectete-462897/diskuse",
+      "selenium": false,
+      "positive": "div.post div div div:last-of-type",
+      "negative": "section.quick-list ul li a div div:last-of-type,section.pre-footer div div div a div:last-of-type"
+    },
+    {
+      "link": "https://www.letemsvetemapplem.eu/2016/11/13/recenze-owc-aura/",
+      "selenium": false,
+      "positive": "div.comment-content p",
+      "negative": "a.topictitle"
+    },
+    {
+      "link": "https://www.czc.cz/apple-iphone-se-16gb-seda/188196/produkt/d3htvouemehnr9nastdijcl1p2/diskuse",
+      "selenium": true,
+      "positive": "p.dis-row-content",
+      "negative": "div.links-block-container li, h1.dis-row-title"
+    },
+    {
+      "link": "https://www.alza.cz/macbook-air-13-cz-2016?dq=4183526&catid=18854758#discussionPosts",
+      "selenium": true,
+      "positive": "div.post",
+      "negative": "div.nameextc span, table.accessoriesBlockNew td.accessoryGroupTitle, #footerContent li a"
+    },
+    {
+      "link": "https://hotel.invia.cz/ceska-republika/sumava/sumava-inn-kvilda/?gclid=CNjQo7S81tACFZAW0wodfOUBsg&dclid=COPMxbS81tACFUKnUQoditwK6A",
+      "selenium": false,
+      "positive": "#review-list-wrap div.bubble p:last-of-type",
+      "negative": "div.bubble-info p:last-of-type"
+    },
+    {
+      "link": "http://www.emimino.cz/diskuse/podbarveni-stranky-emimina-271148/",
+      "selenium": false,
+      "positive": "div.post_in p",
+      "negative": "div.article p, span.user_category"
+    },
+    {
+      "link": "http://www.autoforum.cz/fascinace/10-nejhorsich-aut-vsech-dob-podle-britu-smejdy-zname-i-nezname/?forum",
+      "selenium": false,
+      "positive": "tr.comment td.text",
+      "negative": "#list_forumbb li a"
+    },
+    {
+      "link": "http://www.motorkari.cz/clanky/redakcni-testy/honda/honda-predstavuje-novou-petistovku-rebel-35522.html?diskuze=1",
+      "selenium": false,
+      "positive": "div.content-inner p",
+      "negative": "article div.content p"
+    },
+    {
+      "link": "https://uloz.to/!1WA0yRZt9Vv8/kamenak-5-kamenak-vanocni-2015-avi",
+      "selenium": true,
+      "positive": "#comments div.txt p",
+      "negative": "div.related-result div div.name h2 a"
+    },
+    {
+      "link": "http://www.prostreno.cz/recepty/63/Losos-se-spenatovymi-gnocchi/reviews",
+      "selenium": false,
+      "positive": "div.comment div.text p",
+      "negative": "div.item-content p"
+    },
+    {
+      "link": "http://www.lamer.cz/quote/73740#comments",
+      "selenium": false,
+      "positive": "#comments div.text",
+      "negative": "div.quote p.text, div.latest p:last-of-type"
+    },
+    {
+      "link": "https://www.reddit.com/r/Jokes/comments/5gt39a/whats_your_name_asked_the_teacher/",
+      "selenium": true,
+      "positive": "div.comment div.usertext-body div",
+      "negative": "div.expando div.usertext-body div"
     }
   ]
 }
