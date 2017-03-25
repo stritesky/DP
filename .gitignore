@@ -1,3 +1,7 @@
 # Directories #
 /out/
 .idea/*
+target
+*.log
+result.csv
+inputTest.json
