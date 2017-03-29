@@ -1,5 +1,10 @@
 package myLibrary;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.json.simple.JSONArray;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -19,12 +24,21 @@ public class resultCsv {
 
     public resultCsv(List<List> result) {
 
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode attributes = mapper.createArrayNode();
+
         for (List item : result) {
             for (Object i:item){
                 if (!featuresAll.contains(i) && !i.equals(parser.LABEL_POSITIVE) && !i.equals(parser.LABEL_NEGATIVE)){
                     featuresAll.add(i);
+                    attributes.add((String) i);
                 }
             }
+        }
+        try {
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("attributes.json"),attributes);
+        } catch (IOException e){
+            e.printStackTrace();
         }
 
         for (List resultItem : result){
