@@ -106,4 +106,18 @@ public class parser {
         }
         System.out.println("row of CSV: " + result.size());
     }
+    public List<String> generateAttributeTest (Document doc,String selector) {
+        Elements elements = doc.select(selector);
+
+        List<String> features = new LinkedList<String>();
+        for (Element element:elements) {
+            System.out.println(element.toString());
+            for (IFeatureGenerator gen : featuregen) {
+                gen.createFeatures(features, element);
+            }
+            break;
+//            System.out.println(features);
+        }
+        return features;
+    }
 }
