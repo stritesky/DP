@@ -2,15 +2,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.rapidminer.Process;
 import com.rapidminer.RapidMiner;
+import com.rapidminer.RepositoryProcessLocation;
+import com.rapidminer.example.Attribute;
+import com.rapidminer.example.Example;
+import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.IOContainer;
+import com.rapidminer.repository.ProcessEntry;
+import com.rapidminer.repository.RepositoryLocation;
 import myLibrary.parser;
 import myLibrary.resultCsv;
 import org.codehaus.jackson.JsonNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
+import rapidMiner.ApplyModelResult;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,22 +39,11 @@ public class main {
         csv.create();*/
 
 
-        //TEST RAPIDMINER
-       /* try {
-            RapidMiner.setExecutionMode(RapidMiner.ExecutionMode.COMMAND_LINE);
-            RapidMiner.init();
 
-            Process pr = RapidMiner.readProcessFile(new File("SP-Stritesky.rmp"));
-            IOContainer input = new IOContainer();
-            IOContainer output = pr.run(input);
-            System.out.println(output);
-        }catch ( Exception ex) {
-            System.out.println(ex);
-        }*/
 
        //generate attributes from one link
         try {
-            String result = "1,";
+            String result = "0,";
 
 
 //            Document doc = Jsoup.connect("https://blog.docker.com/").get();
@@ -88,6 +85,21 @@ public class main {
             }
         } catch (IOException e){
             e.printStackTrace();
+        }
+
+        //TEST RAPIDMINER
+        System.out.println("process final start");
+        try {
+            rapidMiner.RapidMiner rapidMiner = new rapidMiner.RapidMiner();
+            List<ApplyModelResult> applyModelResults = rapidMiner.run();
+
+            for (ApplyModelResult item: applyModelResults) {
+                System.out.println("item prediction: " + item.getPrediction());
+            }
+
+        }catch ( Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex);
         }
     }
 }
