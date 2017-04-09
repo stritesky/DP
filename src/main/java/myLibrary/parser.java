@@ -15,6 +15,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,7 +69,6 @@ public class parser {
                 } else {
                     doc = Jsoup.connect((String) link.get("link")).get();
                 }
-//                    System.out.println(doc);
                     generateAttribute(doc, (String) link.get("positive"), result, LABEL_POSITIVE);
                     generateAttribute(doc, (String) link.get("negative"), result, LABEL_NEGATIVE);
 
@@ -106,18 +106,18 @@ public class parser {
         }
         System.out.println("row of CSV: " + result.size());
     }
-    public List<String> generateAttributeTest (Document doc,String selector) {
-        Elements elements = doc.select(selector);
 
-        List<String> features = new LinkedList<String>();
+    public List<List> generateAttributesFromElements (Elements elements) {
+
+        List<List> listFeatures = new ArrayList<List>();
+        List<String> features = new ArrayList<String>();
+
         for (Element element:elements) {
-            System.out.println(element.toString());
             for (IFeatureGenerator gen : featuregen) {
                 gen.createFeatures(features, element);
             }
-            break;
-//            System.out.println(features);
+            listFeatures.add(features);
         }
-        return features;
+        return listFeatures;
     }
 }

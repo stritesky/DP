@@ -30,7 +30,7 @@ public class RapidMiner {
 //            RepositoryLocation loc = new RepositoryLocation("/home/radek/.RapidMiner/repositories/Local Repository/final.rmp");
 //            Process pr = new RepositoryProcessLocation(loc).load(null);
 
-            Process pr = com.rapidminer.RapidMiner.readProcessFile(new File("final.rmp"));
+            Process pr = com.rapidminer.RapidMiner.readProcessFile(new File("final2.rmp"));
             IOContainer input = new IOContainer();
             this.output = pr.run(input);
     }
@@ -45,8 +45,8 @@ public class RapidMiner {
             applyModelResult = new ApplyModelResult();
             while(allAtts.hasNext()) {
                 Attribute a = allAtts.next();
-                if (a.getName() == applyModelResult.ATTRIBUTE_PREDICTION) {
-                    applyModelResult.setPrediction(example.getValue(a));
+                if (a.getName().equals(applyModelResult.ATTRIBUTE_PREDICTION)) {
+                    applyModelResult.setPrediction(example.getValueAsString(a));
                 }
             }
             results.add(applyModelResult);

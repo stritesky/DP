@@ -1,3 +1,4 @@
+import GenerateAttributes.GenerateAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.rapidminer.Process;
@@ -15,6 +16,7 @@ import org.codehaus.jackson.JsonNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
 import rapidMiner.ApplyModelResult;
 
 import java.io.*;
@@ -26,7 +28,7 @@ public class main {
     public static void main(String[] args)  {
 
         //MAIN
-      /*  List<List> result = new LinkedList<List>();
+      /* List<List> result = new LinkedList<List>();
 
         //create parse
         String fileName = "input.json";
@@ -40,9 +42,8 @@ public class main {
 
 
 
-
        //generate attributes from one link
-        try {
+        /*try {
             String result = "0,";
 
 
@@ -52,8 +53,8 @@ public class main {
             parser parser = new parser();
 //            List<String> features = parser.generateAttributeTest(doc, "div.entry-summary.shareleft p");
 //            List<String> features = parser.generateAttributeTest(doc, "li.menu-docker-for-mac a");
-//            List<String> features = parser.generateAttributeTest(doc, "div.ExpandedAnswer span p"); // positive
-            List<String> features = parser.generateAttributeTest(doc, "span.TopicNameSpan"); // negative
+            List<String> features = parser.generateAttributeTest(doc, "div.ExpandedAnswer span p"); // positive
+//            List<String> features = parser.generateAttributeTest(doc, "span.TopicNameSpan"); // negative
             System.out.println(features.toString());
 
             ObjectMapper mapper = new ObjectMapper();
@@ -85,16 +86,32 @@ public class main {
             }
         } catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
 
         //TEST RAPIDMINER
-        System.out.println("process final start");
+
+
+
+        //TEST GENERATE ATTRIBUTES
+        Elements allElements = null;
+       /* try {
+            GenerateAttributes generateAttributes = new GenerateAttributes();
+            generateAttributes.findElements("https://www.svetandroida.cz/hodinky-xiaomi-huami-amazfit-recenze-201609#comments");
+            generateAttributes.generateAttributes();
+            generateAttributes.generateCSV();
+            allElements = generateAttributes.getAllElements();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("process final start");*/
         try {
             rapidMiner.RapidMiner rapidMiner = new rapidMiner.RapidMiner();
             List<ApplyModelResult> applyModelResults = rapidMiner.run();
 
-            for (ApplyModelResult item: applyModelResults) {
-                System.out.println("item prediction: " + item.getPrediction());
+            for (int i = 0; i < applyModelResults.size(); i++ ) {
+//                System.out.println(allElements.get(i).toString());
+                System.out.println("item prediction: " + applyModelResults.get(i).getPrediction());
             }
 
         }catch ( Exception ex) {

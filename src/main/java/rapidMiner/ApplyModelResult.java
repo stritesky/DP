@@ -9,15 +9,15 @@ public class ApplyModelResult {
     public final String ATTRIBUTE_CONFIDENCE_0 = "prediction(att1)";
     public final String ATTRIBUTE_CONFIDENCE_1 = "prediction(att1)";
 
-    private double prediction;
+    private String prediction;
     private double confidence0;
     private double confidence1;
 
-    public double getPrediction() {
+    public String getPrediction() {
         return prediction;
     }
 
-    public void setPrediction(double prediction) {
+    public void setPrediction(String prediction) {
         this.prediction = prediction;
     }
 

@@ -2,11 +2,11 @@ package myLibrary;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import org.json.simple.JSONArray;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class resultCsv {
 
-    private List<Object> featuresAll = new LinkedList<Object>(); //features all without label
+    private List<String> featuresAll = new ArrayList<String>(); //features all without label
     private List<List> featuresCsv = new LinkedList<List>();
 
     //Delimiter used in CSV file
@@ -27,10 +27,19 @@ public class resultCsv {
         ObjectMapper mapper = new ObjectMapper();
         ArrayNode attributes = mapper.createArrayNode();
 
+
+        List<FeatureObject> allFeatures = GenerateAllFeatures.createAllFeature(result);
+/*
+        for (FeatureObject item :allFeatures) {
+            if (item.getCount() > 0) {
+                featuresAll.add(item.getName());
+                attributes.add(item.getName());
+            }
+        }*/
         for (List item : result) {
             for (Object i:item){
                 if (!featuresAll.contains(i) && !i.equals(parser.LABEL_POSITIVE) && !i.equals(parser.LABEL_NEGATIVE)){
-                    featuresAll.add(i);
+                    featuresAll.add((String) i);
                     attributes.add((String) i);
                 }
             }
@@ -50,6 +59,8 @@ public class resultCsv {
             featuresCsv.add(row);
         }
     }
+
+
     public void countOfFeatures (){
 
         System.out.println("Count of features: " + featuresAll.size());
