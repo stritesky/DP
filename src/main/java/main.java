@@ -94,7 +94,7 @@ public class main {
 
         //TEST GENERATE ATTRIBUTES
         Elements allElements = null;
-       /* try {
+        try {
             GenerateAttributes generateAttributes = new GenerateAttributes();
             generateAttributes.findElements("https://www.svetandroida.cz/hodinky-xiaomi-huami-amazfit-recenze-201609#comments");
             generateAttributes.generateAttributes();
@@ -104,14 +104,19 @@ public class main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("process final start");*/
+
+
+        System.out.println("process final start");
         try {
             rapidMiner.RapidMiner rapidMiner = new rapidMiner.RapidMiner();
             List<ApplyModelResult> applyModelResults = rapidMiner.run();
 
             for (int i = 0; i < applyModelResults.size(); i++ ) {
-//                System.out.println(allElements.get(i).toString());
-                System.out.println("item prediction: " + applyModelResults.get(i).getPrediction());
+
+                if (applyModelResults.get(i).getPrediction().equals("1")) {
+                    System.out.println(allElements.get(i).toString());
+                    System.out.println("item prediction: " + applyModelResults.get(i).getPrediction());
+                }
             }
 
         }catch ( Exception ex) {

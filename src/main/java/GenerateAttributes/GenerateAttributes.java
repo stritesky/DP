@@ -6,6 +6,7 @@ import com.rapidminer.gui.new_plotter.utility.ListUtility;
 import myLibrary.parser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
@@ -26,10 +27,12 @@ public class GenerateAttributes {
     public void findElements (String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
 //        this.allElements = doc.select("div.wiswig > p:first-of-type, div.comment_text > p:first-of-type");
-        this.allElements = doc.select("div.wiswig > p");
-//        this.allElements = doc.select("div.comment_text > p:first-of-type");
+//        this.allElements = doc.select("div.wiswig > p");
+//        this.allElements = doc.select("div.comment_text > p");
+        this.allElements = doc.select("p, div, span");
         System.out.println("count of elements:" + allElements.size());
         System.out.println(allElements.toString());
+
     }
 
     public void generateAttributes (){
@@ -49,35 +52,55 @@ public class GenerateAttributes {
 
 
         String result = "";
-
-
-        int count = 0;
-        for (List<String> allFeatureOfLinkList: allFeaturesOfLinkList) {
-
-            count++;
-            System.out.println(count);
-            if (count == 2) break;
-            result += "1,";
-            for (String allFeature:allFeatures) {
-                if (allFeatureOfLinkList.contains(allFeature)) {
-                    result += "1,";
-                } else {
-                    result += "0,";
-                }
-            }
-            result = result.substring(0,result.length() - 1 );
-            result += "\n";
-        }
+        FileWriter fileWriter = null;
 
         try {
-            File statText = new File("test.csv");
+           /* File statText = new File("test.csv");
             FileOutputStream is = new FileOutputStream(statText);
             OutputStreamWriter osw = new OutputStreamWriter(is);
             Writer w = new BufferedWriter(osw);
             w.write(result);
-            w.close();
+            w.close();*/
+            String fileName = "test.csv";
+            fileWriter = new FileWriter(fileName);
+
+            fileWriter.append(result);
+
+            int count = 0;
+            for (List<String> allFeatureOfLinkList: allFeaturesOfLinkList) {
+                boolean first = true;
+                count++;
+                System.out.println(count);
+//                if (count == 50) break;
+
+
+                for (String allFeature:allFeatures) {
+                    if (first) {
+                        fileWriter.append("1");
+                        fileWriter.append(",");
+                    } else {
+                        fileWriter.append(",");
+                    }
+                    if (allFeatureOfLinkList.contains(allFeature)) {
+                        fileWriter.append("1");
+                    } else {
+                        fileWriter.append("0");
+                    }
+                    first = false;
+                }
+                fileWriter.append("\n");
+            }
+
         } catch (IOException e) {
             System.err.println("Problem writing to the file statsTest.txt");
+        } finally {
+            try {
+                fileWriter.flush();
+                fileWriter.close();
+            } catch (IOException e) {
+                System.out.println("Error while flushing/closing fileWriter !!!");
+                e.printStackTrace();
+            }
         }
 
     }

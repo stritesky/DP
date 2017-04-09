@@ -110,9 +110,10 @@ public class parser {
     public List<List> generateAttributesFromElements (Elements elements) {
 
         List<List> listFeatures = new ArrayList<List>();
-        List<String> features = new ArrayList<String>();
+        List<String> features ;
 
         for (Element element:elements) {
+            features = new ArrayList<String>();
             for (IFeatureGenerator gen : featuregen) {
                 gen.createFeatures(features, element);
             }
@@ -120,4 +121,5 @@ public class parser {
         }
         return listFeatures;
     }
+
 }
