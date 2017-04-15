@@ -96,7 +96,8 @@ public class main {
         Elements allElements = null;
         try {
             GenerateAttributes generateAttributes = new GenerateAttributes();
-            generateAttributes.findElements("https://www.svetandroida.cz/hodinky-xiaomi-huami-amazfit-recenze-201609#comments");
+//            generateAttributes.findElements("https://www.svetandroida.cz/hodinky-xiaomi-huami-amazfit-recenze-201609#comments");
+            generateAttributes.findElements("https://www.novinky.cz/diskuse?id=482318&articleId=/internet-a-pc/mobil/435181-rychlejsi-internet-ve-vsech-sitich-operatori-si-vymeni-frekvence-pro-lte.html&sectionId=927");
             generateAttributes.generateAttributes();
             generateAttributes.generateCSV();
             allElements = generateAttributes.getAllElements();
@@ -113,10 +114,10 @@ public class main {
 
             for (int i = 0; i < applyModelResults.size(); i++ ) {
 
-                if (applyModelResults.get(i).getPrediction().equals("1")) {
+//                if (applyModelResults.get(i).getPrediction().equals("1")) {
                     System.out.println(allElements.get(i).toString());
                     System.out.println("item prediction: " + applyModelResults.get(i).getPrediction());
-                }
+//                }
             }
 
         }catch ( Exception ex) {

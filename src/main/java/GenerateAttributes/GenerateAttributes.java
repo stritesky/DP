@@ -11,6 +11,8 @@ import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,12 +28,22 @@ public class GenerateAttributes {
 
     public void findElements (String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
-//        this.allElements = doc.select("div.wiswig > p:first-of-type, div.comment_text > p:first-of-type");
-//        this.allElements = doc.select("div.wiswig > p");
-//        this.allElements = doc.select("div.comment_text > p");
         this.allElements = doc.select("p, div, span");
+        ArrayList <Integer> removex = new ArrayList<Integer>();
+        for (Integer i = 0; i < allElements.size();i++) {
+            if (allElements.get(i).getAllElements().size() > 2 ||  allElements.get(i).ownText().length() < 10) {
+                System.out.println(allElements.get(i).ownText());
+                removex.add(i);
+            }
+        }
+
+        Collections.sort(removex,Collections.reverseOrder());
+        for (int j = 0; j< removex.size(); j++) {
+            this.allElements.remove((int)removex.get(j));
+        }
+
         System.out.println("count of elements:" + allElements.size());
-        System.out.println(allElements.toString());
+//        System.out.println(allElements.toString());
 
     }
 
