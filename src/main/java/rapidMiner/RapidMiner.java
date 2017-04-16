@@ -30,7 +30,7 @@ public class RapidMiner {
 //            RepositoryLocation loc = new RepositoryLocation("/home/radek/.RapidMiner/repositories/Local Repository/final.rmp");
 //            Process pr = new RepositoryProcessLocation(loc).load(null);
 
-            Process pr = com.rapidminer.RapidMiner.readProcessFile(new File("final2.rmp"));
+            Process pr = com.rapidminer.RapidMiner.readProcessFile(new File("final.rmp"));
             IOContainer input = new IOContainer();
             this.output = pr.run(input);
     }
