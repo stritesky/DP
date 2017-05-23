@@ -2,65 +2,125 @@
   "links" : [ {
     "link" : "http://www.lidovky.cz/diskuse.aspx?iddiskuse=A161123_074429_ln_zahranici_ELE",
     "selenium" : false,
-    "positive" : [ "div.contribution table tbody tr td.right p:last-of-type" ],
-    "negative" : [ "#dokumenty h2" ]
+    "positive" : [
+      "div.contribution table tbody tr td.right p:last-of-type"
+    ],
+    "negative" : [
+      "#dokumenty h2",
+      "div.disc-tip p"
+    ]
   }, {
     "link" : "http://tn.nova.cz/clanek/zima-uderi-na-cesko-blizi-se-konec-tepla-i-inverze-predpoved.html",
     "selenium" : false,
     "positive" : [ "div.com_text" ],
-    "negative" : [ ".article_small h4 a" ]
+    "negative" : [
+      ".article_small h4 a",
+      "div.atricle_date",
+      "div.image_title",
+      "div.login.anonymous div.info",
+      "#footer div.part_center p",
+      "p.copyright"
+    ]
   }, {
     "link" : "http://9gag.com/gag/aMwjjbR?ref=fsidebar#comment",
     "selenium" : true,
     "positive" : [ "div.badge-content" ],
-    "negative" : [ ".info-container h3 a" ]
-  }, {
-    "link" : "http://stalkerky.cz/agata-neco-chystaaa/",
-    "selenium" : false,
-    "positive" : [ "article.comment-body div p" ],
-    "negative" : [ "li.menu-item a" ]
-  }, {
+    "negative" : [
+      ".info-container h3 a",
+      "p.static",
+      "div.empty-message p",
+      "#jsid-upload-url-btn p",
+      "p.lead",
+      "p.alternative"
+    ]
+  },
+  {
     "link" : "http://www.csfd.cz/film/52430-nocni-zvirata/komentare/",
     "selenium" : false,
     "positive" : [ "ul.ui-posts-list li p" ],
-    "negative" : [ "#ratings ul li a" ]
+    "negative" : [
+      "#ratings ul li a",
+      "p.genre",
+      "p.origin",
+      "#cookies-agreement",
+      "#page-footer p"
+    ]
   }, {
     "link" : "http://mtbs.cz/clanek/v-usa-hori-diskuse-nad-elektrokoly-na-trailech-jsou-nechtena/kategorie/pozvanky#.WDWXr3XhBhF",
     "selenium" : false,
     "positive" : [ "#comments li p" ],
-    "negative" : [ "div.rss-feed li a p" ]
+    "negative" : [
+      "div.rss-feed li a p",
+      "a.related-news p",
+      "div.emphasize p",
+      "div.itembody p",
+      "div.iteminfo",
+      "div.white"
+    ]
   }, {
     "link" : "http://www.denik.cz/diskuse/turecke-dobrodruzstvi.html",
     "selenium" : true,
     "positive" : [ "div.diskuse-text" ],
-    "negative" : [ "a[data-ga-push=menu]" ]
+    "negative" : [
+      "a[data-ga-push=menu]",
+      "div.clanek-head p",
+      "div.diskuse-nadpis",
+      "diskuse-vlozeni",
+      "div.promo-box-cars-3 div.title",
+      "div.title-car",
+      "div.price"
+    ]
   }, {
     "link" : "http://www.zive.cz/clanky/6-programatorskych-chyb-ktere-zabijely-a-staly-stovky-milionu-dolaru/sc-3-a-184788/default.aspx?artcomments=1",
     "selenium" : false,
     "positive" : [ ".forum-text p" ],
-    "negative" : [ "div.cs-cnt-cl-r div.fs-os div.bx-cnt ul li a span" ]
+    "negative" : [
+      "div.cs-cnt-cl-r div.fs-os div.bx-cnt ul li a span",
+      "div.forum-head",
+      "p.forum-post-info",
+      "div.bx-cnt p"
+    ]
   }, {
     "link" : "http://www.auto.cz/dieselgate-cislo-2-100027/diskuse?typ=1&sort=2",
     "selenium" : false,
     "positive" : [ ".comment-text" ],
-    "negative" : [ "div.ziveauto div ul li a" ]
+    "negative" : [
+      "div.ziveauto div ul li a",
+      "div.d_head p",
+      "p.info_name",
+      "#magazines p",
+      "div.recomended"
+    ]
   }, {
     "link" : "http://zpravy.idnes.cz/diskuse.aspx?iddiskuse=A161106_145250_domaci_bur",
     "selenium" : false,
     "positive" : [ ".user-text p" ],
-    "negative" : [ "div.tag-list a" ]
+    "negative" : [
+      "div.tag-list a",
+      "div.opener",
+      "div.disc-tip p",
+      "div.date.hover"
+    ]
   }, {
     "link" : "http://www.blesk.cz/clanek/celebrity-svetove-celebrity/432315/rozvod-jolie-a-pitta-brad-ma-novou-velmi-slavnou-lasku-uz-spolu-spi-tvrdi-bodyguard.html",
     "selenium" : true,
     "positive" : [ "div.commentsBubble p" ],
-    "negative" : [ "div.list-article-small a" ]
-  }, {
-    "link" : "http://www.foxnews.com/politics/2016/11/20/schumer-hints-compromise-with-trump-but-not-on-obamacare.html",
-    "selenium" : true,
-    "positive" : [ "div.fyre-comment p" ],
-    "negative" : [ "span.ob-rec-text" ]
-  }, {
-    "link" : "http://www.parlamentnilisty.cz/arena/monitor/CT-dostala-nakladacku-za-porad-o-ctvrti-ze-ktere-jsou-muslimsti-vrazi-To-radeji-ani-nectete-462897/diskuse",
+    "negative" : [
+      "div.list-article-small a",
+      "div.calendar",
+      "div.dateTime",
+      "div.leadsection p",
+      "div.articleBody p",
+      "span.galleryCount",
+      "div.gallery div",
+      "div.author.auth-margin",
+      "div.relatedArticles div",
+      "div.commentsCount",
+      "#copyrightPopupClose"
+    ]
+  },
+  {
+    "link" : "http://www.parlamentnilisty.cz/arena/monitor/Velky-projev-Emmanuela-Macrona-My-jsme-obnova-a-nadeje-484907/diskuse",
     "selenium" : false,
     "positive" : [ "div.post div div div:last-of-type" ],
     "negative" : [ "section.quick-list ul li a div div:last-of-type,section.pre-footer div div div a div:last-of-type" ]
@@ -68,7 +128,12 @@
     "link" : "https://www.letemsvetemapplem.eu/2016/11/13/recenze-owc-aura/",
     "selenium" : false,
     "positive" : [ "div.comment-content p" ],
-    "negative" : [ "a.topictitle" ]
+    "negative" : [
+      "a.topictitle",
+      "div.art-content p",
+      "div.list-inner",
+      "div.comments-bubble span"
+    ]
   }, {
     "link" : "https://www.czc.cz/apple-iphone-se-16gb-seda/188196/produkt/d3htvouemehnr9nastdijcl1p2/diskuse",
     "selenium" : true,
@@ -83,22 +148,37 @@
     "link" : "https://hotel.invia.cz/ceska-republika/sumava/sumava-inn-kvilda/?gclid=CNjQo7S81tACFZAW0wodfOUBsg&dclid=COPMxbS81tACFUKnUQoditwK6A",
     "selenium" : false,
     "positive" : [ "#review-list-wrap div.bubble p:last-of-type" ],
-    "negative" : [ "div.bubble-info p:last-of-type" ]
+    "negative" : [
+      "div.bubble-info p:last-of-type",
+      "span.vhide",
+      "ul.reset li span",
+      "div.box-testimonial p"
+    ]
   }, {
     "link" : "http://www.emimino.cz/diskuse/podbarveni-stranky-emimina-271148/",
     "selenium" : false,
     "positive" : [ "div.post_in p" ],
-    "negative" : [ "div.article p, span.user_category" ]
+    "negative" : [
+      "div.article p, span.user_category",
+      "div.date span",
+      "div.article p",
+      "#foot p"
+    ]
   }, {
     "link" : "http://www.autoforum.cz/fascinace/10-nejhorsich-aut-vsech-dob-podle-britu-smejdy-zname-i-nezname/?forum",
     "selenium" : false,
-    "positive" : [ "tr.comment td.text" ],
+    "positive" : [ "tr.comment td.text p" ],
     "negative" : [ "#list_forumbb li a" ]
   }, {
-    "link" : "http://www.motorkari.cz/clanky/redakcni-testy/honda/honda-predstavuje-novou-petistovku-rebel-35522.html?diskuze=1",
+    "link" : "http://www.motorkari.cz/clanky/clanky-prestavby/steampunkovy-monster-s2r-36429.html?diskuze=1",
     "selenium" : false,
     "positive" : [ "div.content-inner p" ],
-    "negative" : [ "article div.content p" ]
+    "negative" : [
+      "article div.content p",
+      "fieldset p",
+      "article a div p span",
+      "div.column p.bold"
+    ]
   }, {
     "link" : "https://uloz.to/!1WA0yRZt9Vv8/kamenak-5-kamenak-vanocni-2015-avi",
     "selenium" : true,
@@ -108,16 +188,162 @@
     "link" : "http://www.prostreno.cz/recepty/63/Losos-se-spenatovymi-gnocchi/reviews",
     "selenium" : false,
     "positive" : [ "div.comment div.text p" ],
-    "negative" : [ "div.item-content p" ]
+    "negative" : [
+      "div.item-content p",
+      "div.article-item div div.item-content p",
+      "div.cookies-consent"
+    ]
   }, {
     "link" : "http://www.lamer.cz/quote/73740#comments",
     "selenium" : false,
     "positive" : [ "#comments div.text" ],
-    "negative" : [ "div.quote p.text, div.latest p:last-of-type" ]
-  }, {
-    "link" : "https://www.reddit.com/r/Jokes/comments/5gt39a/whats_your_name_asked_the_teacher/",
-    "selenium" : true,
-    "positive" : [ "div.comment div.usertext-body div" ],
-    "negative" : [ "div.expando div.usertext-body div" ]
-  } ]
+    "negative" : [
+      "div.quote p.text, div.latest p:last-of-type",
+      "#media",
+      "span.reply",
+      "span.signature"
+    ]
+  },
+    {
+      "link" : "https://www.reddit.com/r/Jokes/comments/5gt39a/whats_your_name_asked_the_teacher/",
+      "selenium" : true,
+      "positive" : [ "div.comment div.usertext-body div" ],
+      "negative" : [
+        "div.expando div.usertext-body div",
+        "#header-bottom-right span.user",
+        "span.score",
+        "div.shortlink",
+        "div.md p",
+        "p.bottommenu"
+      ]
+    },
+    {
+      "link" : "https://www.planetaher.cz/bang-2",
+      "selenium" : false,
+      "positive" : [
+        "p.dr-topics__p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://stackoverflow.com/questions/1897422/how-can-i-display-an-error-message-in-matlab",
+      "selenium" : false,
+      "positive" : [
+        "div.post-text p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.serialzone.cz/clanek/8421-serialove-osudy-the-simpsons/diskuze/",
+      "selenium" : false,
+      "positive" : [
+        "div.dtr-content"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.edna.cz/10-things-i-hate-about-you/hodnoceni/",
+      "selenium" : false,
+      "positive" : [
+        "div.comment div.text-box p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.bbcgoodfood.com/recipes/2892676/creamy-salmon-with-chunky-ratatouille",
+      "selenium" : false,
+      "positive" : [
+        "div.comment__text div.field-item"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.recepty.cz/recept/orechove-listky-147713",
+      "selenium" : false,
+      "positive" : [
+        "div.comment-list-item-inner p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "https://www.toprecepty.cz/recept/50703-polevka-z-cerstveho-zeli-s-houbami-a-cizrnou/",
+      "selenium" : false,
+      "positive" : [
+        "div.crossroad-posts__content p:first-of-type"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "https://recepty.vareni.cz/luxusni-koprova-omacka/#commentsAnchor",
+      "selenium" : false,
+      "positive" : [
+        "div.blockcomments div.item-text p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.apetitonline.cz/recept/pernicky#comment-10664",
+      "selenium" : false,
+      "positive" : [
+        "div.comment-text div.content"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "https://www.recepty.eu/mlete-maso/dedovy-karbanatky.html",
+      "selenium" : true,
+      "positive" : [
+        "div.message"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.igurmet.cz/recepty/maso/hovezi-maso/masove-kulicky-s-rajskou-omackou-1625/?utm_medium=hp-recommend",
+      "selenium" : true,
+      "positive" : [
+        "div.message > div:not(.clearfix):not(.pull-right)"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.zdravapotravina.cz/ovocne-salaty/ananasovy-salat-s-kukurici",
+      "selenium" : false,
+      "positive" : [
+        "div.comment p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.hrej.cz/recenze/dead-rising-4-5572/",
+      "selenium" : false,
+      "positive" : [
+        "div.comment div.words p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://doupe.zive.cz/clanek/guillermo-del-toro-se-obul-do-konami-a-objevil-se-v-traileru-na-death-stranding/?showforum=1",
+      "selenium" : false,
+      "positive" : [
+        "div.font-resize-area p"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://www.aragorn.cz/diskuze/online-hry/",
+      "selenium" : false,
+      "positive" : [
+        "p.c4"
+      ],
+      "negative" : []
+    },
+    {
+      "link" : "http://diskuse.tiscali.cz/games/clanek/postapokalypticke-rpg-seven-the-days-long-gone-predstavuje-svuj-svet-plny-kontrastu-289869/",
+      "selenium" : false,
+      "positive" : [
+        "div.cnt div span.disc-smile"
+      ],
+      "negative" : []
+    }
+  ]
 }

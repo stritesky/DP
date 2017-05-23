@@ -9,8 +9,8 @@ import java.util.List;
  * Created by komp2 on 12.10.2016.
  */
 public class ParentTagNameGenerator implements IFeatureGenerator {
-	private static final String PREFIX = "parentTagNameDepth-";
-	private static final int MAX_DEPTH = 30;
+	private static final String PREFIX = "parentTagName-";
+	private static final int MAX_DEPTH = 10;
 
 	public void createFeatures(
 			List<String> features,

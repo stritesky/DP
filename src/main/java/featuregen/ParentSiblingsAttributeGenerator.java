@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ParentSiblingsAttributeGenerator implements IFeatureGenerator {
 	private static final String PREFIX = "parentDepth-";
-	private static final int MAX_DEPTH = 30;
+	private static final int MAX_DEPTH = 10;
 
 	public void createFeatures(List<String> features, Element element) {
 		int i = 0;

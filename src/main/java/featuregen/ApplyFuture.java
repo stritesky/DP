@@ -7,36 +7,34 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by radek on 15.4.17.
  */
 public class ApplyFuture {
+    private static final Logger LOG = LoggerFactory.getLogger(ApplyFuture.class);
 
     public static final String LABEL_POSITIVE = "label_positive";
     public static final String LABEL_NEGATIVE = "label_negative";
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    private String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
 
     private List<IFeatureGenerator> featureGenerators = new ArrayList<IFeatureGenerator>();
     private List<String> featuresAll = new ArrayList<String>(); //features all without label
     private ObjectMapper objectMapper = new ObjectMapper();
-
-
-    private WebDriver driver = null;
     private List<List> listOfAllGenerateFeatures = new ArrayList();
-
 
     public ApplyFuture() {
         featureGenerators.add(new ParentTagNameGenerator());
@@ -45,8 +43,7 @@ public class ApplyFuture {
         featureGenerators.add(new ParentSiblingsAttributeGenerator());
     }
 
-
-    //TRAIN DATABASE
+    //train database
     public void generateTrainDatabase(String pathToInputFile) throws IOException {
         generateFeatureFromInputFile(pathToInputFile);
         createFuturesAll();
@@ -54,8 +51,7 @@ public class ApplyFuture {
     }
 
     //Apply model to elements
-
-    public Elements applyModelToLink (String link) throws IOException {
+    public Elements applyModelToLink (String link) throws IOException, URISyntaxException {
         Elements findElements = findElements(link);
         List<List> ListOfFeatures = generateAttributesFromElements(findElements);
         createCSVFileForExecute(ListOfFeatures);
@@ -63,12 +59,12 @@ public class ApplyFuture {
     }
 
     private Elements findElements (String url) throws IOException {
+        LOG.trace("findElements");
         Document doc = Jsoup.connect(url).get();
         Elements allElements = doc.select("p, div, span"); //select
         ArrayList <Integer> removex = new ArrayList<Integer>();
         for (Integer i = 0; i < allElements.size(); i++) { //fdf
-            if (allElements.get(i).getAllElements().size() > 2 ||  allElements.get(i).ownText().length() < 10) {
-                System.out.println(allElements.get(i).ownText());
+            if (allElements.get(i).getAllElements().size() > 4 ||  allElements.get(i).ownText().length() < 10) {
                 removex.add(i);
             }
         }
@@ -77,37 +73,29 @@ public class ApplyFuture {
         for (int j = 0; j < removex.size(); j++) {
             allElements.remove((int)removex.get(j));
         }
-
-        System.out.println("count of elements:" + allElements.size());
+        LOG.trace("Count of Potential elements is {}", allElements.size());
 
         return allElements;
     }
 
     private void generateFeatureFromInputFile(String pathToInputFile) throws IOException {
-        System.setProperty("webdriver.phantomjs.driver","/usr/bin/phantomjs");
-        driver = new PhantomJSDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-
 
         JsonNode inputFile = this.objectMapper.readTree(new File(pathToInputFile));
         JsonNode links = inputFile.get("links");
 
         //Generate features
         for (JsonNode link: links) {
-            Document doc;
-            System.out.println(link.get("link").asText());
-            if (link.get("selenium").asText().equals("true")) {
-                System.out.println("selenium");
-                driver.get(link.get("link").asText());
-                doc = Jsoup.parse(driver.getPageSource());
-            } else {
+            Document doc ;
+            LOG.trace("send HTTP GET method to {}", link.get("link").asText());
+            try {
                 doc = Jsoup.connect(link.get("link").asText()).get();
+            } catch (Exception e ) {
+                LOG.warn("error HTTP GET e: {}", e.getMessage());
+                continue;
             }
             generateAttribute(doc, link.get("positive"), this.listOfAllGenerateFeatures, LABEL_POSITIVE);
             generateAttribute(doc, link.get("negative"), this.listOfAllGenerateFeatures, LABEL_NEGATIVE);
         }
-        driver.quit();
     }
 
     private void createFuturesAll () throws IOException {
@@ -121,7 +109,11 @@ public class ApplyFuture {
                 }
             }
         }
-        this.objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("attributes.json"),attributes);
+        File file = new File("data-" + timeStamp + "/attributes.json");
+        file.getParentFile().mkdirs();
+
+        this.objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, attributes);
+        LOG.trace("attributes.json with all features was created");
     }
 
     private void createCSVFileTrainDatabase() {
@@ -137,11 +129,13 @@ public class ApplyFuture {
             csvContent.deleteCharAt(csvContent.length()-1);
             csvContent.append(NEW_LINE_SEPARATOR);
         }
-        writeContentToFile(csvContent, "result.csv");
+        writeContentToFile(csvContent, "data-" + timeStamp + "/result.csv");
     }
 
     private void createCSVFileForExecute(List<List> listOgFeatures) throws IOException {
-        JsonNode allFeaturesJson = this.objectMapper.readTree(new File("attributes.json"));
+
+        JsonNode allFeaturesJson = this.objectMapper.readTree(new File("repository/attributes.json"));
+
         List<String> allFeatures = new ArrayList<String>();
         StringBuffer csvContent = new StringBuffer();
 
@@ -169,32 +163,30 @@ public class ApplyFuture {
             csvContent.append(NEW_LINE_SEPARATOR);
         }
 
-        writeContentToFile(csvContent, "test.csv" );
+        writeContentToFile(csvContent, "repository/dataset/apply.csv" );
     }
 
-    public void writeContentToFile (StringBuffer content, String fileName) {
+    private void writeContentToFile (StringBuffer content, String fileName) {
         BufferedWriter bwr = null;
 
         try {
             bwr = new BufferedWriter(new FileWriter(new File(fileName)));
             bwr.write(content.toString());
-            System.out.println("CSV file was created successfully !!!");
+            LOG.trace("CSV file {} was created successfully !!!", fileName);
         } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
-            e.printStackTrace();
+            LOG.error("Error in CsvFileWriter !!!, exception: {}", e.getMessage());
         } finally {
             try {
                 bwr.flush();
                 bwr.close();
             } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
-                e.printStackTrace();
+                LOG.error("Error while flushing/closing fileWriter !!! Exception: {}", e.getMessage());
             }
         }
     }
 
 
-    private void generateAttribute (Document doc,JsonNode selectors, List<List> result, String label) {
+    private void generateAttribute (Document doc, JsonNode selectors, List<List> result, String label) {
 
         for (JsonNode selector: selectors) {
             Elements elements = doc.select(selector.asText());
@@ -206,7 +198,7 @@ public class ApplyFuture {
                     gen.createFeatures(features, element);
                 }
                 if (!result.contains(features)){
-                    System.out.println("LABEL: " + label + "select: " + selector +  "element:  " + element);
+                    LOG.trace("new features from label: {} select: {}, element: {}", label, selector, element);
                     result.add(features);
                 }
             }
@@ -217,7 +209,6 @@ public class ApplyFuture {
 
         List<List> listFeatures = new ArrayList<List>();
         List<String> features ;
-//        ArrayNode elements = this.objectMapper.cr
 
         for (Element element :elements) {
             features = new ArrayList<String>();
@@ -228,5 +219,4 @@ public class ApplyFuture {
         }
         return listFeatures;
     }
-
 }
